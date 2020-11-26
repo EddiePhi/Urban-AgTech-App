@@ -1,0 +1,23 @@
+{
+  "name": "Urban-AgTech-App",
+  "version": "1.0.0",
+  "description": "Deployed link: https://eddiephi.github.io/Urban-AgTech-App/",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EddiePhi/Urban-AgTech-App.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EddiePhi/Urban-AgTech-App/issues"
+  },
+  "homepage": "https://github.com/EddiePhi/Urban-AgTech-App#readme",
+  "dependencies": {
+    "dayjs": "^1.9.6"
+  }
+}

@@ -1,0 +1,19 @@
+* {
+    color: black;
+}
+
+body {
+    background-image: url("./images/double-bubble-outline.png"); /* Pulled from subtlepatterns.com */
+  }
+
+a {
+    color: white; /* For visibility */
+}
+
+.space-up {
+    margin-top: 5%;
+}
+.space-sides {
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+}

@@ -1,0 +1,130 @@
+<!-- Home Page -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Using BootStrap CDN from https://getbootstrap.com/ -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="./Assets/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <title>Home</title>
+</head>
+<body>
+    <!-- Navbar content -->
+    <nav class="navbar navbar-dark bg-primary">
+        <nav><a href="index.html">Home</a></nav>
+        <nav><a href="./cropFacts/cropFacts.html">Crop Facts</a></nav>
+        <nav><a href="communityhub.html">Community Hub</a></nav>
+        <nav><a href="./weather/weather.html">Weather</a></nav>
+    </nav>
+    <br>
+     
+    <div id="dateTest">Date: </div>
+    <!-- Responsive Bootstrap container + card -->    
+    <main class="container d-flex justify-content-center space-up">
+        <section class="card" style="width: 72rem;">
+            <section class="card-body">
+                <section class="row">
+                    <h2  class="card-title col-3">Weather</h2>
+                    <!-- Filler Div for spacing. Figure out how to properly later-->
+                    <section class="col-4"></section>
+                    <input type="text" id="weatherZip">
+                    <input id="weatherSubmit" type="submit" value="Submit">
+                </section>
+                <section class="row">
+                    <section id="weather" class="col-4 d-flex justify-content-center"></section>
+                    <section id="weather2" class="col-4"></section>
+                </section>
+                <section id="forecast" class="row"></section>
+                
+            </section>
+        </section>
+    </main>
+    
+    <main class="container d-flex justify-content-center space-up">
+        <section class="card" style="width: 64rem;">
+            <section class="card-body">
+                <h2 class="card-title">Crop Facts</h2>
+                <!-- Filler Div for spacing. Figure out how to properly later-->
+                <input id="factSubmit" type="submit" value="Tomato">
+                <section id="cropFacts"></section>
+            </section>
+        </section>
+    </main>
+    
+    <main class="container d-flex justify-content-center space-up">
+        <section class="card" style="width: 64rem;">
+            <section class="card-body">
+                <h2 id="planAssist" class="card-title">Planning Assistant</h2>
+            </section>
+        </section>
+    </main>
+
+    <main class="container d-flex justify-content-center space-up">
+        <section class="card" style="width: 64rem;">
+            <section class="card-body">
+                <h2 class="card-title">Crop Recommendations</h2>
+                <!-- <input type="text" id="cropInput"> -->
+                <input id="recSubmit" type="submit" value="Tomato">
+                <section id="cropRec"></section>
+            </section>
+        </section>
+    </main>
+
+    <main class="container d-flex justify-content-center space-up">
+        <section class="card" style="width: 64rem;">
+            <section id="startDateCalc" class="card-body">
+                <h2 class="card-title">Start Date Calculator</h2>
+            </section>
+        </section>
+    </main>
+
+    <main class="container d-flex justify-content-center space-up">
+        <section class="card" style="width: 64rem;">
+            <section class="card-body">
+                <h2 id="waterSched" class="card-title">Water Schedule</h2>
+            </section>
+        </section>
+    </main>
+
+    <main class="container d-flex justify-content-center space-up">
+        <section class="card" style="width: 64rem;">
+            <section class="card-body">
+                <h2 id="commHub" class="card-title">Community Hub</h2>
+            </section>
+        </section>
+    </main>
+
+
+    <!-- Using BootStrap CDN from https://getbootstrap.com/ -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    
+    <!-- Jquery and AJAX -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+
+    <!-- Moment.js -->
+    <script type="text/javascript" src="https://MomentJS.com/downloads/moment.js"></script>
+    <script type="text/javascript" src="https://momentjs.com/downloads/moment-with-locales.js"></script>
+    
+    <!-- DayJS -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/dayjs@1.9.6/dayjs.min.js"></script>
+    <!-- Custom JS -->
+    <script defer src="./assets/javascript/script.js"></script> 
+    <script defer src="./assets/javascript/crop-facts.js"></script>  
+    <script defer src="./assets/javascript/weather.js"></script> 
+    <script defer src="./assets/javascript/crop-rec.js"></script> 
+    <script defer src="./assets/javascript/start-date-calc.js"></script> 
+    <script src="path/to/dayjs/dayjs.min.js"></script>
+<script>
+  var today = document.getElementById("dateTest");
+  
+  var date = dayjs().format('MM/DD/YYYY')
+  today.textContent = date;
+</script>
+</body>
+</html>
