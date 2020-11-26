@@ -27,16 +27,13 @@
         <section class="card" style="width: 72rem;">
             <section class="card-body">
                 <section class="row">
-                    <h2  class="card-title col-3">Weather</h2>
+                    <h2  class="card-title ml-3 mr-auto">Weather</h2>
                     <!-- Filler Div for spacing. Figure out how to properly later-->
-                    <section class="col-4"></section>
-                    <input type="text" id="weatherZip">
-                    <input id="weatherSubmit" type="submit" value="Submit">
+                    <!-- <section class="col-4"></section> -->
+                    <input type="text" class="ml-auto" id="weatherZip">
+                    <input id="weatherSubmit" type="submit" class="mr-3" value="Submit">
                 </section>
-                <section class="row">
-                    <section id="weather" class="col-4 d-flex justify-content-center"></section>
-                    <section id="weather2" class="col-4"></section>
-                </section>
+                    <section id="weather" class="col-12"></section>
                 <section id="forecast" class="row"></section>
                 
             </section>
@@ -77,6 +74,8 @@
         <section class="card" style="width: 64rem;">
             <section id="startDateCalc" class="card-body">
                 <h2 class="card-title">Start Date Calculator</h2>
+                <input id="calcSubmit" type="submit" value="Tomato">
+                <section id="startDateCalc"></section>
             </section>
         </section>
     </main>
@@ -112,19 +111,17 @@
     <script type="text/javascript" src="https://momentjs.com/downloads/moment-with-locales.js"></script>
     
     <!-- DayJS -->
+    <script src="path/to/dayjs/dayjs.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/dayjs@1.9.6/dayjs.min.js"></script>
     <!-- Custom JS -->
     <script defer src="./assets/javascript/script.js"></script> 
     <script defer src="./assets/javascript/crop-facts.js"></script>  
     <script defer src="./assets/javascript/weather.js"></script> 
-    <script defer src="./assets/javascript/crop-rec.js"></script> 
-    <script defer src="./assets/javascript/start-date-calc.js"></script> 
-    <script src="path/to/dayjs/dayjs.min.js"></script>
+    <script defer src="./assets/javascript/crop-rec-and-start-date.js"></script> 
+    
+
 <script>
-  var today = document.getElementById("dateTest");
   
-  var date = dayjs().format('MM/DD/YYYY')
-  today.textContent = date;
 </script>
 </body>
 </html>

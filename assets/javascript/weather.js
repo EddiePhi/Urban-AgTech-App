@@ -245,36 +245,60 @@ $(document).ready(function () {
   
         //Define an <h4> tag to hold the city name based on zip code captured.
         let cityName = response.name;
-        let currentCity = $(`<section><h4 class="d-flex justify-content-center">${cityName}</h4></section>`);
+        let currentCity = $(`
+          <section class="d-flex justify-content-center col-12">
+            <em>
+              <h4>${cityName}</h4>
+            </em>
+          </section>
+        `);
         $("#weather").append(currentCity);
   
         //Append date after cityName variable
-        let momentDate = moment().format("L");
-        $("#weather2").append(`<section>(${momentDate})</section>`);
+        let currentDate = dayjs().format("MM/DD/YYYY");
+        $("#weather").append(`
+          <section class="d-flex justify-content-center col-12">${currentDate}</section>
+        `);
   
         //Append Weather Icon after momentDate
         let currentIcon = response.weather[0].icon;
-        $("#weather").append(`<section class="d-flex justify-content-center"><img src="http://openweathermap.org/img/wn/${currentIcon}@2x.png"></section>`);
-  
-        //Append Temperature after Weather Icon
+        $("#weather").append(`
+          <section id="icon" class="d-flex justify-content-center col-12">
+            <img src="http://openweathermap.org/img/wn/${currentIcon}@2x.png">
+          </section>
+        `);
+        
+        //Append Weather Description after Weather Icon
+        let currentDesc = response.weather[0].description;
+        $("#weather").append(`
+          <section id="description" class="d-flex justify-content-center col-12">Description: ${currentDesc.toUpperCase()}</section>
+        `);
+
+        //Append Temperature after weather Description
         let cityTemp = response.main.temp;
         //Conversion from Kelvin to Fahrenheit: https://www.rapidtables.com/convert/temperature/how-kelvin-to-fahrenheit.html
         let tempF = Math.round(((cityTemp - 273.15) * 9/5 + 32)*100)/100
-        let temp = $(`<section id="temp">Temp: ${tempF}°F</section>`);
+        let temp = $(`
+          <section id="temp" class="d-flex justify-content-center col-12">Temp: ${tempF}°F</section>
+        `);
         //$("#weather").empty();
-        $("#weather2").append(temp);
+        $("#weather").append(temp);
   
         //Append Humidity after Temperature
         let cityHumidity = response.main.humidity;
-        let humidity = $(`<section id="humidity">Humidity: ${cityHumidity}%</section>`);
+        let humidity = $(`
+          <section id="humidity" class="d-flex justify-content-center col-12">Humidity: ${cityHumidity}%</section>
+        `);
         //$("#weather").empty();
-        $("#weather2").append(humidity);
+        $("#weather").append(humidity);
   
         //Append Wind Speed after Humidty
         let cityWindSpeed = response.wind.speed;
-        let windSpeed = $(`<section id="windSpeed">Wind Speed: ${cityWindSpeed} mph</section>`);
+        let windSpeed = $(`
+          <section id="windSpeed" class="d-flex justify-content-center col-12">Wind Speed: ${cityWindSpeed} mph</section>
+        `);
         //$("#weather").empty();
-        $("#weather2").append(windSpeed);
+        $("#weather").append(windSpeed);
   
         //Multi-use variables for subsequent AJAX requests
         let latitude = response.coord.lat;
@@ -289,9 +313,11 @@ $(document).ready(function () {
           console.log(response);
   
           let cityUVIndex = response.value;
-          let uvIndex = $(`<section id="currentUv">UV Index: ${cityUVIndex}</section>`);
+          let uvIndex = $(`
+            <section id="currentUv" class="d-flex justify-content-center col-12">UV Index: ${cityUVIndex}</section>
+          `);
           //Append to current weather2 info stack from before
-          $("#weather2").append(uvIndex);
+          $("#weather").append(uvIndex);
   
           //If/Else conditional to determine background color of UV Index Element
           if (cityUVIndex >= 0 && cityUVIndex < 3) {
@@ -332,11 +358,11 @@ $(document).ready(function () {
           date5.empty();
   
           //Grab date data from Forecast API
-          let dateA = response.list[0].dt_txt;
-          let dateB = response.list[8].dt_txt;
-          let dateC = response.list[16].dt_txt;
-          let dateD = response.list[24].dt_txt;
-          let dateE = response.list[32].dt_txt;
+          let dateA = dayjs(response.list[0].dt_txt).format('MM/DD/YYYY');
+          let dateB = dayjs(response.list[8].dt_txt).format('MM/DD/YYYY');
+          let dateC = dayjs(response.list[16].dt_txt).format('MM/DD/YYYY');
+          let dateD = dayjs(response.list[24].dt_txt).format('MM/DD/YYYY');
+          let dateE = dayjs(response.list[32].dt_txt).format('MM/DD/YYYY');
   
           //Create <div> elements to append date text
           date1.append(`<section class="text">${dateA}</section>`);
@@ -358,7 +384,22 @@ $(document).ready(function () {
           date3.append(`<img id="icon" alt="weather-icon" src="http://openweathermap.org/img/wn/${iconC}@2x.png"/>`);
           date4.append(`<img id="icon" alt="weather-icon" src="http://openweathermap.org/img/wn/${iconD}@2x.png"/>`);
           date5.append(`<img id="icon" alt="weather-icon" src="http://openweathermap.org/img/wn/${iconE}@2x.png"/>`);
-  
+          
+          //Grab descriptipn data from Forecast API.
+          let descA = response.list[0].weather[0].description;
+          let descB = response.list[8].weather[0].description;
+          let descC = response.list[16].weather[0].description;
+          let descD = response.list[24].weather[0].description;
+          let descE = response.list[32].weather[0].description;
+          //Append description of weather based on icon.
+          date1.append(`<section class="text">${descA.toUpperCase()}</section>`);
+          date2.append(`<section class="text">${descB.toUpperCase()}</section>`);
+          date3.append(`<section class="text">${descC.toUpperCase()}</section>`);
+          date4.append(`<section class="text">${descD.toUpperCase()}</section>`);
+          date5.append(`<section class="text">${descE.toUpperCase()}</section>`);
+
+
+
           //Grab temp data from Forecast API and convert to Fahrenheit
           //Kelvin to Fahrenheit conversion reminder: Math.round(((K - 273.15) * 9/5 + 32)*100)/100 = F
           let tempA = response.list[0].main.temp;
