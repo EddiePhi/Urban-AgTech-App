@@ -367,7 +367,6 @@ $(document).ready(function () {
           let dateC = dayjs(response.list[16].dt_txt).format('MM/DD/YYYY');
           let dateD = dayjs(response.list[24].dt_txt).format('MM/DD/YYYY');
           let dateE = dayjs(response.list[32].dt_txt).format('MM/DD/YYYY');
-
           //Create <div> elements to append date text
           date1.append(`<section class="text d-flex justify-content-center">${dateA}</section>`);
           date2.append(`<section class="text d-flex justify-content-center">${dateB}</section>`);
