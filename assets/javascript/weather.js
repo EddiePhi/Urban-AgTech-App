@@ -3,6 +3,7 @@
 
 // WEATHER API: https://openweathermap.org/api
   // API Key: 0f848c85d2b3dd23041f7c21a9bd6d0b
+  // NEW Key: 0eb4861263656bf20b9acec3cf640a5a
   // Current Weather by ZIP code: https://api.openweathermap.org/data/2.5/weather?zip={zip code},{country code}&appid={API key}
   // 5 day/3 hour forecast by Zip code: //https://api.openweathermap.org/data/2.5/forecast?zip=${zipCode},us&appid=0f848c85d2b3dd23041f7c21a9bd6d0b
   // UV Index: http://api.openweathermap.org/data/2.5/uvi?lat=" + lat + "&lon=" + lon + "&appid=0f848c85d2b3dd23041f7c21a9bd6d0b
@@ -216,17 +217,16 @@ $(document).ready(function () {
     // };
   
     //Define searchCity function
-    function searchCity(event) {
+    function searchCity() {
   
       //Grab value of user input AFTER click even is initiated
-      let zipCode = $("#weatherZip").val();
-  
+      const zipCode = $("#weatherZip").val();
   
       //Define URL for AJAX request
-      let currentWeatherURL = `https://api.openweathermap.org/data/2.5/weather?zip=${zipCode},us&appid=0f848c85d2b3dd23041f7c21a9bd6d0b`;
+      const currentWeatherURL = `https://api.openweathermap.org/data/2.5/weather?zip=${zipCode},us&appid=0eb4861263656bf20b9acec3cf640a5a`;
   
       //Define array to hold localStorage value
-      let searchHistory = [];
+      const searchHistory = [];
       searchHistory.push(zipCode);
   
       //Clear zipCode input field after submitting a zip code
@@ -301,11 +301,13 @@ $(document).ready(function () {
         $("#weather").append(windSpeed);
   
         //Multi-use variables for subsequent AJAX requests
-        let latitude = response.coord.lat;
-        let longitude = response.coord.lon;
-  
+        
+          const latitude = response.coord.lat;
+          const longitude = response.coord.lon;
+
+
         //AJAX request of UV Index based on data from currentWeatherURL
-        let uvURL = `https://api.openweathermap.org/data/2.5/uvi?lat=${latitude}&lon=${longitude}&appid=0f848c85d2b3dd23041f7c21a9bd6d0b`;
+        let uvURL = `https://api.openweathermap.org/data/2.5/uvi?lat=${latitude}&lon=${longitude}&appid=0eb4861263656bf20b9acec3cf640a5a`;
         $.ajax({
           url: uvURL,
           method: "GET",
@@ -314,7 +316,7 @@ $(document).ready(function () {
   
           let cityUVIndex = response.value;
           let uvIndex = $(`
-            <section id="currentUv" class="d-flex justify-content-center col-12">UV Index: ${cityUVIndex}</section>
+            <section id="currentUv" class="d-flex justify-content-center mx-auto col-4">UV Index: ${cityUVIndex}</section>
           `);
           //Append to current weather2 info stack from before
           $("#weather").append(uvIndex);
@@ -332,58 +334,60 @@ $(document).ready(function () {
             uvIndex.css("backgroundColor", "purple");
           }
         });
-  
+
         //AJAX request for 5 day forecast
-        let forecastURL = `https://api.openweathermap.org/data/2.5/forecast?zip=${zipCode},us&appid=0f848c85d2b3dd23041f7c21a9bd6d0b`;
+
+        let forecastURL = `https://api.openweathermap.org/data/2.5/forecast?zip=${zipCode},us&appid=0eb4861263656bf20b9acec3cf640a5a`;
         $.ajax({
           url: forecastURL,
           method: "GET",
         }).then(function (response) {
           console.log(response);
-  
+
           //Director to forecast HTML container
           let forecast = $('#forecast')
           //Set forecast dates
-          let date1 = $(`<section class="space-up space-sides"></section>`);
-          let date2 = $(`<section class="space-up space-sides"></section>`);
-          let date3 = $(`<section class="space-up space-sides"></section>`);
-          let date4 = $(`<section class="space-up space-sides"></section>`);
-          let date5 = $(`<section class="space-up space-sides"></section>`);
-  
+          let date1 = $(`<section class="space-up space-sides dates col-xl-2 col-lg-2 col-md-3 col-sm-4 col-6 mx-auto"></section>`);
+          let date2 = $(`<section class="space-up space-sides dates col-xl-2 col-lg-2 col-md-3 col-sm-4 col-6 mx-auto"></section>`);
+          let date3 = $(`<section class="space-up space-sides dates col-xl-2 col-lg-2 col-md-3 col-sm-4 col-6 mx-auto"></section>`);
+          let date4 = $(`<section class="space-up space-sides dates col-xl-2 col-lg-2 col-md-3 col-sm-4 col-6 mx-auto"></section>`);
+          let date5 = $(`<section class="space-up space-sides dates col-xl-2 col-lg-2 col-md-3 col-sm-4 col-6 mx-auto"></section>`);
+
           //Clear fields before new search request data populates to prevent repetitive info
-          date1.empty();
-          date2.empty();
-          date3.empty();
-          date4.empty();
-          date5.empty();
-  
+          forecast.empty()
+          // date1.empty();
+          // date2.empty();
+          // date3.empty();
+          // date4.empty();
+          // date5.empty();
+
           //Grab date data from Forecast API
           let dateA = dayjs(response.list[0].dt_txt).format('MM/DD/YYYY');
           let dateB = dayjs(response.list[8].dt_txt).format('MM/DD/YYYY');
           let dateC = dayjs(response.list[16].dt_txt).format('MM/DD/YYYY');
           let dateD = dayjs(response.list[24].dt_txt).format('MM/DD/YYYY');
           let dateE = dayjs(response.list[32].dt_txt).format('MM/DD/YYYY');
-  
+
           //Create <div> elements to append date text
-          date1.append(`<section class="text">${dateA}</section>`);
-          date2.append(`<section class="text">${dateB}</section>`);
-          date3.append(`<section class="text">${dateC}</section>`);
-          date4.append(`<section class="text">${dateD}</section>`);
-          date5.append(`<section class="text">${dateE}</section>`);
-  
+          date1.append(`<section class="text d-flex justify-content-center">${dateA}</section>`);
+          date2.append(`<section class="text d-flex justify-content-center">${dateB}</section>`);
+          date3.append(`<section class="text d-flex justify-content-center">${dateC}</section>`);
+          date4.append(`<section class="text d-flex justify-content-center">${dateD}</section>`);
+          date5.append(`<section class="text d-flex justify-content-center">${dateE}</section>`);
+
           //Grab icon data from Forecast API
           let iconA = response.list[0].weather[0].icon;
           let iconB = response.list[8].weather[0].icon;
           let iconC = response.list[16].weather[0].icon;
           let iconD = response.list[24].weather[0].icon;
           let iconE = response.list[32].weather[0].icon;
-  
+
           //Append <img> elements for icons after the date
-          date1.append(`<img id="icon" alt="weather-icon" src="http://openweathermap.org/img/wn/${iconA}@2x.png"/>`);
-          date2.append(`<img id="icon" alt="weather-icon" src="http://openweathermap.org/img/wn/${iconB}@2x.png"/>`);
-          date3.append(`<img id="icon" alt="weather-icon" src="http://openweathermap.org/img/wn/${iconC}@2x.png"/>`);
-          date4.append(`<img id="icon" alt="weather-icon" src="http://openweathermap.org/img/wn/${iconD}@2x.png"/>`);
-          date5.append(`<img id="icon" alt="weather-icon" src="http://openweathermap.org/img/wn/${iconE}@2x.png"/>`);
+          date1.append(`<img id="icon" class="d-flex justify-content-center mx-auto" alt="weather-icon" src="http://openweathermap.org/img/wn/${iconA}@2x.png"/>`);
+          date2.append(`<img id="icon" class="d-flex justify-content-center mx-auto" alt="weather-icon" src="http://openweathermap.org/img/wn/${iconB}@2x.png"/>`);
+          date3.append(`<img id="icon" class="d-flex justify-content-center mx-auto" alt="weather-icon" src="http://openweathermap.org/img/wn/${iconC}@2x.png"/>`);
+          date4.append(`<img id="icon" class="d-flex justify-content-center mx-auto" alt="weather-icon" src="http://openweathermap.org/img/wn/${iconD}@2x.png"/>`);
+          date5.append(`<img id="icon" class="d-flex justify-content-center mx-auto" alt="weather-icon" src="http://openweathermap.org/img/wn/${iconE}@2x.png"/>`);
           
           //Grab descriptipn data from Forecast API.
           let descA = response.list[0].weather[0].description;
@@ -392,11 +396,11 @@ $(document).ready(function () {
           let descD = response.list[24].weather[0].description;
           let descE = response.list[32].weather[0].description;
           //Append description of weather based on icon.
-          date1.append(`<section class="text">${descA.toUpperCase()}</section>`);
-          date2.append(`<section class="text">${descB.toUpperCase()}</section>`);
-          date3.append(`<section class="text">${descC.toUpperCase()}</section>`);
-          date4.append(`<section class="text">${descD.toUpperCase()}</section>`);
-          date5.append(`<section class="text">${descE.toUpperCase()}</section>`);
+          date1.append(`<section class="text d-flex justify-content-center">${descA.toUpperCase()}</section>`);
+          date2.append(`<section class="text d-flex justify-content-center">${descB.toUpperCase()}</section>`);
+          date3.append(`<section class="text d-flex justify-content-center">${descC.toUpperCase()}</section>`);
+          date4.append(`<section class="text d-flex justify-content-center">${descD.toUpperCase()}</section>`);
+          date5.append(`<section class="text d-flex justify-content-center">${descE.toUpperCase()}</section>`);
 
 
 
@@ -412,27 +416,27 @@ $(document).ready(function () {
           let tempDF = Math.round(((tempD - 273.15) * 9/5 + 32)*100)/100;
           let tempE = response.list[32].main.temp;
           let tempEF = Math.round(((tempE - 273.15) * 9/5 + 32)*100)/100;
-  
+
           //Append temp data after icon
-          date1.append(`<section>Temp: ${tempAF}°F</section>`);
-          date2.append(`<section>Temp: ${tempBF}°F</section>`);
-          date3.append(`<section>Temp: ${tempCF}°F</section>`);
-          date4.append(`<section>Temp: ${tempDF}°F</section>`);
-          date5.append(`<section>Temp: ${tempEF}°F</section>`);
-  
+          date1.append(`<section class="d-flex justify-content-center">${tempAF}°F</section>`);
+          date2.append(`<section class="d-flex justify-content-center">${tempBF}°F</section>`);
+          date3.append(`<section class="d-flex justify-content-center">${tempCF}°F</section>`);
+          date4.append(`<section class="d-flex justify-content-center">${tempDF}°F</section>`);
+          date5.append(`<section class="d-flex justify-content-center">${tempEF}°F</section>`);
+
           //Grab humidity data from Forecast API
           let humidityA = response.list[0].main.humidity;
           let humidityB = response.list[8].main.humidity;
           let humidityC = response.list[16].main.humidity;
           let humidityD = response.list[24].main.humidity;
           let humidityE = response.list[32].main.humidity;
-  
+
           //Append humidity data after temp
-          date1.append(`<section>Humidity: ${humidityA}%</section>`);
-          date2.append(`<section>Humidity: ${humidityB}%</section>`);
-          date3.append(`<section>Humidity: ${humidityC}%</section>`);
-          date4.append(`<section>Humidity: ${humidityD}%</section>`);
-          date5.append(`<section>Humidity: ${humidityE}%</section>`);
+          date1.append(`<section class="d-flex justify-content-center">${humidityA}%</section>`);
+          date2.append(`<section class="d-flex justify-content-center">${humidityB}%</section>`);
+          date3.append(`<section class="d-flex justify-content-center">${humidityC}%</section>`);
+          date4.append(`<section class="d-flex justify-content-center">${humidityD}%</section>`);
+          date5.append(`<section class="d-flex justify-content-center">${humidityE}%</section>`);
 
           forecast.append(date1);
           forecast.append(date2);
@@ -440,11 +444,10 @@ $(document).ready(function () {
           forecast.append(date4);
           forecast.append(date5);
         });
-      });
-  
+    });
       //Set Local Storage. Must stay withing curly brackets for searchCity function
       localStorage.setItem("savedDetails", JSON.stringify(searchHistory));
       console.log(localStorage);
       console.log(storageParse[0]);
-    }
+  }  
 });
